@@ -74,9 +74,9 @@ if (isset($_POST['update'])) {
         <div class="shadow w-350 p-3 text-center">
             <div class="user-details expanded">
                 <div class="gravatar">
-                    <img src="upload/<?=$_SESSION['image']?>" width="150" height"150" />
+                    <img class="img-fluid rounded-circle" src="upload/<?=$_SESSION['image']?>" width="150" height="150" />
                 </div>
-                <h2 class="user-name"><?= $_SESSION['username'] ?></h2>
+                <h2 class="user-name mt-4"><?= $_SESSION['username'] ?></h2>
                 <p class="user-email"><?= $_SESSION['email'] ?></p>
                 <p class="exclusions"><a href="#popup1" class="btn btn-success mt-3">Edit Profile</a></p>
                 <div id="popup1" class="overlay">

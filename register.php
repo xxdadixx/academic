@@ -4,27 +4,26 @@ require_once('config/config.php');
 if (isset($_POST["email"])) {
 	$username = $_POST['username'];
 	$email = $_POST['email'];
-	$email = $_POST['id_card_number'];
+	$idcard = $_POST['id_card_number'];
 
 	$check_data = $pdo->prepare("SELECT * FROM users WHERE username = :username OR email = :email OR id_card_number = :idcard");
 	$check_data->bindParam(":username", $username);
 	$check_data->bindParam(":email", $email);
-	$check_data->bindParam(":idcard", $email);
+	$check_data->bindParam(":idcard", $idcard);
 	$check_data->execute();
 	$result = $check_data->rowCount();
 
 	if ($result > 0) {
-		$_SESSION['warning'] = "The email or username or id card number already exists in the database.";
+		$warning = "The email or username or id card number already exists in the database.";
 	}
 	try {
-		if (!isset($_SESSION['error']) && !isset($_SESSION['warning'])) {
+		if (!isset($error) && !isset($warning)) {
 			if (isset($_FILES['image']['name']) and !empty($_FILES['image']['name'])) {
 
 				$img_name = $_FILES['image']['name'];
 				$tmp_name = $_FILES['image']['tmp_name'];
-				$error = $_FILES['image']['error'];
 
-				if ($error === 0) {
+				if (!isset($error)) {
 					$img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
 					$img_ex_to_lc = strtolower($img_ex);
 
@@ -50,12 +49,12 @@ if (isset($_POST["email"])) {
 						);
 						$statement = $pdo->prepare($query);
 						$statement->execute($user_data);
-						$_SESSION['success'] = "Register finish! <a href='login.php' class='alert-link'>Login</a>";
+						$success = "Register finish! <a href='login.php' class='alert-link'>Login</a>";
 					} else {
-						$_SESSION['error'] = "You can't upload files of this type";
+						$error = "You can't upload files of this type";
 					}
 				} else {
-					$_SESSION['error'] = "unknown error occurred!";
+					$error = "unknown error occurred!";
 				}
 			} else {
 				$query = "INSERT INTO users (firstname, lastname, username ,email, password, phone_number, birthday, id_card_number) VALUES (:firstname, :lastname, :username, :email, :password, :phone_number, :birthday, :id_card_number)";
@@ -72,7 +71,7 @@ if (isset($_POST["email"])) {
 				);
 				$statement = $pdo->prepare($query);
 				$statement->execute($user_data);
-				$_SESSION['success'] = "Register finish! <a href='login.php' class='alert-link'>Login</a>";
+				$success = "Register finish! <a href='login.php' class='alert-link'>Login</a>";
 			}
 		}
 	} catch (PDOException $e) {
@@ -83,17 +82,15 @@ if (isset($_POST["email"])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="sweetalert2.min.js"></script>
-	<link rel="stylesheet" href="sweetalert2.min.css">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/regis_style.css">
+	<link rel="stylesheet" href="regis_style.css">
 	<style>
 		.active_tab1 {
 			background-color: #FFFFFF;
@@ -122,26 +119,26 @@ if (isset($_POST["email"])) {
 
 			<form method="post" class="form" id="register_form" enctype="multipart/form-data">
 				<img src="https://i.pinimg.com/564x/fc/28/1f/fc281fe7423ce9776ed5fbb36a62cb57.jpg" style="margin-top:-30px;" width="100" height="100" alt="logo">
-				<?php if (isset($_SESSION['success'])) { ?>
+				<?php if (isset($success)) { ?>
 					<div class="alert alert-success" style="margin-bottom:-25px;" role="alert">
 						<?php {
-							echo $_SESSION['success'];
+							echo $success;
 						}
 						?>
 					</div>
 				<?php } ?>
-				<?php if (isset($_SESSION['warning'])) { ?>
+				<?php if (isset($warning)) { ?>
 					<div class="alert alert-warning" style="margin-bottom:-25px;" role="alert">
 						<?php {
-							echo $_SESSION['warning'];
+							echo $warning;
 						}
 						?>
 					</div>
 				<?php } ?>
-				<?php if (isset($_SESSION['error'])) { ?>
+				<?php if (isset($error)) { ?>
 					<div class="alert alert-danger" style="margin-bottom:-25px;" role="alert">
 						<?php {
-							echo $_SESSION['error'];
+							echo $error;
 						}
 						?>
 					</div>
@@ -161,18 +158,23 @@ if (isset($_POST["email"])) {
 					<div class="tab-pane active" id="login_details">
 						<div>
 							<div>
-								<div class="form-group" style="margin-top:10px;">
-									<input type="text" name="username" id="username" class="input" placeholder="Username" />
+								<p class="fieldset" style="margin-top:10px;">
+									<label class="image-replace">Username</label>
+									<input class="full-width has-padding has-border" type="text" placeholder="Username" name="username" id="username">
 									<span id="error_username" class="text-danger"></span>
-								</div>
-								<div class="form-group">
-									<input type="password" name="password" id="password" class="input" placeholder="Password" />
+								</p>
+								<p class="fieldset">
+									<label class="image-replace">Password</label>
+									<input class="full-width has-padding has-border" type="password" placeholder="Password" name="password" id="password">
+									<a href="#0" class="hide-password">Show</a>
 									<span id="error_password" class="text-danger"></span>
-								</div>
-								<div class="form-group">
-									<input type="password" name="c_password" id="c_password" class="input" placeholder="Confirm Password" />
+								</p>
+								<p class="fieldset">
+									<label class="image-replace">Confirm Password</label>
+									<input class="full-width has-padding has-border" type="password" placeholder="Confirm Password" name="c_Password" id="c_password">
+									<a href="#0" class="hide-password">Show</a>
 									<span id="error_c_password" class="text-danger"></span>
-								</div>
+								</p>
 								<br />
 								<div align="center">
 									<button type="button" name="btn_login_details" id="btn_login_details" class="btn">Next</button>
@@ -191,22 +193,26 @@ if (isset($_POST["email"])) {
 					<div class="tab-pane fade" id="personal_details">
 						<div>
 							<div>
-								<div class="form-group" style="margin-top:10px;">
-									<input type="text" name="firstname" id="firstname" class="input" placeholder="Firstname" />
+								<p class="fieldset" style="margin-top:10px;">
+									<label class="image-replace">Firstname</label>
+									<input class="full-width has-padding has-border" type="text" placeholder="Firstname" name="firstname" id="firstname">
 									<span id="error_firstname" class="text-danger"></span>
-								</div>
-								<div class="form-group">
-									<input type="text" name="lastname" id="lastname" class="input" placeholder="Lastname" />
+								</p>
+								<p class="fieldset">
+									<label class="image-replace">Lastname</label>
+									<input class="full-width has-padding has-border" type="text" placeholder="Lastname" name="lastname" id="lastname">
 									<span id="error_lastname" class="text-danger"></span>
-								</div>
-								<div class="form-group">
-									<input type="date" name="birthday" id="birthday" class="input" />
+								</p>
+								<p class="fieldset">
+									<label class="image-replace">Birthday</label>
+									<input class="full-width has-padding has-border" type="date" name="birthday" id="birthday">
 									<span id="error_birthday" class="text-danger"></span>
-								</div>
-								<div class="form-group">
-									<input type="text" name="id_card_number" id="id_card_number" class="input" placeholder="ID Card number" />
+								</p>
+								<p class="fieldset">
+									<label class="image-replace">ID Card number</label>
+									<input class="full-width has-padding has-border" type="text" placeholder="ID Card number" name="id_card_number" id="id_card_number">
 									<span id="error_idcard" class="text-danger"></span>
-								</div>
+								</p>
 								<br />
 								<div align="center">
 									<button type="button" name="previous_btn_personal_details" id="previous_btn_personal_details" class="btn">Previous</button>
@@ -226,15 +232,20 @@ if (isset($_POST["email"])) {
 					<div class="tab-pane fade" id="contact_details">
 						<div>
 							<div>
-								<div class="form-group" style="margin-top:10px;">
-									<input type="text" name="phone_number" id="phone_number" class="input" placeholder="Phone number" />
+							<p class="fieldset">
+									<label class="image-replace">Phone number</label>
+									<input class="full-width has-padding has-border" type="text" placeholder="Phone number" name="phone_number" id="phone_number">
 									<span id="error_phone_number" class="text-danger"></span>
-								</div>
-								<div class="form-group">
-									<input type="text" name="email" id="email" class="input" placeholder="Email" />
+								</p>
+								<p class="fieldset">
+									<label class="image-replace">Email</label>
+									<input class="full-width has-padding has-border" type="text" placeholder="Email" name="email" id="email">
 									<span id="error_email" class="text-danger"></span>
-								</div>
-								<input type="file" class="form-control" name="image">
+								</p>
+								<p class="fieldset">
+									<label class="image-replace">Image</label>
+									<input class="full-width has-padding has-border" type="file" name="image">
+								</p>
 								<br />
 								<div align="center">
 									<button type="button" name="previous_btn_contact_details" id="previous_btn_contact_details" class="btn">Previous</button>
@@ -271,12 +282,12 @@ if (isset($_POST["email"])) {
 
 <?php
 
-if (isset($_SESSION['error'])) {
-	unset($_SESSION['error']);
-} else if (isset($_SESSION['warning'])) {
-	unset($_SESSION['warning']);
-} else if (isset($_SESSION['success'])) {
-	unset($_SESSION['success']);
+if (isset($error)) {
+	unset($error);
+} else if (isset($warning)) {
+	unset($warning);
+} else if (isset($success)) {
+	unset($success);
 }
 
 ?>
@@ -489,5 +500,16 @@ if (isset($_SESSION['error'])) {
 
 		});
 
+	});
+
+	//hide or show password
+	$('.hide-password').on('click', function() {
+		var $this = $(this),
+			$password_field = $this.prev('input');
+
+		('password' == $password_field.attr('type')) ? $password_field.attr('type', 'text'): $password_field.attr('type', 'password');
+		('Show' == $this.text()) ? $this.text('Hide'): $this.text('Show');
+		//focus and move cursor to the end of input field
+		$password_field.putCursorAtEnd();
 	});
 </script>

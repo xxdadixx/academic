@@ -29,10 +29,6 @@ body {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
-.gravatar img {
-    border-radius: 100%;
-}
-
 /* user Details (Read-Only) */
 .user-details {
     height: 0;
@@ -43,27 +39,23 @@ body {
 }
 
 .user-details.expanded {
-    height: 360px;
+    height: auto;
     padding-bottom: 30px;
     opacity: 1;
 }
 
 .gravatar {
-    width: 200px;
-    height: 200px;
-    padding-top: 30px;
+    width: auto;
+    height: auto;
+    padding-top: 16px;
     margin: 0 auto;
     /* background:#aaa url('http://download4u.in/wp-content/uploads/2014/09/Batman-Arkham-Origins.png') center center;
     border-radius:100%; */
 }
 
-.gravatar img {
-    border-radius: 100%;
-}
-
 .user-name,
 .user-email {
-    margin: 10px 0 0 0;
+    margin: auto;
     color: #333;
     font-family: Georgia, sans-serif;
 }
@@ -258,10 +250,6 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-img {
-    border-radius: 50%;
-}
-
 nav {
     background: #BFEAEA;
     padding: 5px 20px;
@@ -291,6 +279,10 @@ label {
     font-size: 16px;
     padding: 15px 5px;
     white-space: nowrap;   
+}
+
+.menu img {
+    border-radius: 50%;
 }
 
 .logo a,
