@@ -40,16 +40,6 @@ if (!isset($_SESSION['username'])) {
     <div class="container">
         <div class="row">
             <div class="col">
-                <?php
-
-                if (isset($_SESSION['user_login'])) {
-                    $user_id = $_SESSION['user_login'];
-                    $stmt = $conn->query("SELECT * FROM users WHERE id = $user_id");
-                    $stmt->execute();
-                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                }
-
-                ?>
                 <h1 class="title">TAKE IT TO DREAM</h1>
                 <p class="mt-4">The Main Library at Indiana University sinks over an inch every year because when it was built, engineers failed to take into account the weight of all the books that would occupy the building.</p>
                 <p>Mario, of Super Mario Bros. fame, appeared in the 1981 arcade game, Donkey Kong. His original name was Jumpman, but was changed to Mario to honor the Nintendo of America's landlord, Mario Segali.</p>
@@ -60,8 +50,5 @@ if (!isset($_SESSION['username'])) {
             </div>
         </div>
         <header></header>
-    </div>
-    <div class="container">
-
     </div>
 </body>

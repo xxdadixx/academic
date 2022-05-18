@@ -23,7 +23,7 @@
 
 body {
 	align-items: center;
-	background-color: #BFEAEA;
+	background: linear-gradient(to bottom left, #ace7e7, #ddf3f8);
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;

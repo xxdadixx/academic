@@ -23,7 +23,7 @@
 
 body {
 	align-items: center;
-	background-color: #BFEAEA;
+	background: linear-gradient(to bottom left, #ace7e7, #ddf3f8);
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -31,157 +31,6 @@ body {
 	display: grid;
 	height: 100vh;
 	place-items: center;
-}
-
-
-.form .hide-password {
-	display: inline-block;
-	position: absolute;
-	text-decoration: none;
-	right: 0;
-	top: 0;
-	padding: 6px 15px;
-	border-left: 1px solid #d2d8d8;
-	top: 50%;
-	bottom: auto;
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);
-	font-size: 14px;
-	font-size: 0.875rem;
-	color: #343642;
-}
-
-.form .fieldset {
-	position: relative;
-	margin: 0.8em 0;
-}
-
-.form .fieldset:first-child {
-	margin-top: 0;
-}
-
-.form .fieldset:last-child {
-	margin-bottom: 0;
-}
-
-.form label.username {
-	background-image: url("https://codyhouse.co/demo/login-signup-modal-window/img/cd-icon-username.svg");
-}
-
-.form label.password {
-	background-image: url("https://codyhouse.co/demo/login-signup-modal-window/img/cd-icon-password.svg");
-}
-
-.form input {
-	margin: 0;
-	padding: 0;
-	border-radius: 20px;
-}
-
-.form input.full-width {
-	width: 100%;
-}
-
-.form input.has-padding {
-	padding: 12px 20px 12px 35px;
-}
-
-.form input.has-border {
-	border: 1px solid #d2d8d8;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-ms-appearance: none;
-	-o-appearance: none;
-	appearance: none;
-}
-
-.form input.has-border:focus {
-	border-color: #343642;
-	box-shadow: 0 0 5px rgba(52, 54, 66, 0.1);
-	outline: none;
-}
-
-.form input[type=password] {
-	/* space left for the HIDE button */
-	padding-right: 65px;
-}
-
-.form input[type=text] {
-	/* space left for the HIDE button */
-	padding-right: 65px;
-}
-
-.form label.image-replace {
-	/* replace text with an icon */
-	display: inline-block;
-	position: absolute;
-	left: 15px;
-	top: 50%;
-	bottom: auto;
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	-o-transform: translateY(-50%);
-	transform: translateY(-50%);
-	height: 20px;
-	width: 20px;
-	overflow: hidden;
-	text-indent: 100%;
-	white-space: nowrap;
-	color: transparent;
-	text-shadow: none;
-	background-repeat: no-repeat;
-	background-position: 50% 0;
-}
-
-.upload {
-	width: 125px;
-	position: relative;
-	margin: auto;
-}
-
-.upload img {
-	border-radius: 50%;
-	border: 8px solid #DCDCDC;
-}
-
-.upload .round {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	background: #00B4FF;
-	width: 32px;
-	height: 32px;
-	line-height: 33px;
-	text-align: center;
-	border-radius: 50%;
-	overflow: hidden;
-}
-
-.upload .round input[type="file"] {
-	position: absolute;
-	transform: scale(2);
-	opacity: 0;
-}
-
-input[type=file]::-webkit-file-upload-button {
-	cursor: pointer;
-}
-
-
-/*? Birth Day css */
-input[type="date"]:before {
-	content: attr(placeholder) !important;
-	color: #aaa;
-	margin-right: 0px;
-}
-
-input[type="date"]:focus:before,
-input[type="date"]:valid:before {
-	content: "";
 }
 
 .form__title {
@@ -324,11 +173,10 @@ input[type="date"]:valid:before {
 	font-size: 0.8rem;
 	font-weight: bold;
 	letter-spacing: 0.1rem;
-	padding: 0.7rem 1rem;
+	padding: 0.9rem 4rem;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
 	line-height: 1;
-	margin-top: -20px;
 }
 
 .form>.btn {
@@ -357,59 +205,107 @@ input[type="date"]:valid:before {
 
 }
 
-.input {
-	background-color: #fff;
-	border: 2px solid transparent;
-	outline: none;
-	padding: 0.9rem 0.9rem;
-	margin: 0.5rem 0;
-	width: 100%;
-	border-radius: 1.5rem;
-	font-size: 0.8rem;
-	line-height: normal;
-	writing-mode: horizontal-tb !important;
-	text-rendering: auto;
-	color: -internal-light-dark(black, white);
-	letter-spacing: normal;
-	word-spacing: normal;
-	line-height: normal;
-	text-transform: none;
-	text-indent: 0px;
-	text-shadow: none;
+.form .hide-password {
 	display: inline-block;
-	text-align: start;
-	appearance: auto;
-	-webkit-rtl-ordering: logical;
-	cursor: text;
-	background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
-	margin: 0em;
-	border-width: 2px;
-	border-style: inset;
-	border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-	border-image: initial;
-	font-family: inherit;
+	position: absolute;
+	text-decoration: none;
+	right: 0;
+	top: 0;
+	padding: 6px 15px;
+	border-left: 1px solid #d2d8d8;
+	top: 50%;
+	bottom: auto;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	font-size: 14px;
+	font-size: 0.875rem;
+	color: #343642;
 }
 
-.input-regis {
-	background-color: #fff;
-	border: 0.1rem solid var(--bs-dark);
-	outline: none;
-	padding: 0.9rem 0.9rem;
-	margin: 0.5rem 0;
+.form .fieldset {
+	position: relative;
+	margin: 0.7rem 0;
+}
+
+.form .fieldset:first-child {
+	margin-top: 0;
+}
+
+.form .fieldset:last-child {
+	margin-bottom: 0;
+}
+
+.form label.username {
+	background-image: url("https://codyhouse.co/demo/login-signup-modal-window/img/cd-icon-username.svg");
+}
+
+.form label.password {
+	background-image: url("https://codyhouse.co/demo/login-signup-modal-window/img/cd-icon-password.svg");
+}
+
+.form input {
+	margin: 0;
+	padding: 0;
+	border-radius: 20px;
+}
+
+.form input.full-width {
 	width: 100%;
-	border-radius: 1.5rem;
-	font-size: 0.8rem;
-	line-height: normal;
 }
 
-.input-small {
-	background-color: #fff;
-	border: 2px solid transparent;
+.form input.has-padding {
+	padding: 12px 20px 12px 50px;
+}
+
+.form input.has-border {
+	border: 1px solid #d2d8d8;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+.form input.has-border:focus {
+	border-color: #343642;
+	box-shadow: 0 0 5px rgba(52, 54, 66, 0.1);
 	outline: none;
-	padding: 0.9rem 0.9rem;
-	margin: 0.5rem 0;
-	width: 30%;
-	border-radius: 1.5rem;
+}
+
+.form input[type=password] {
+	/* space left for the HIDE button */
+	padding-right: 65px;
+}
+
+.form input[type=text] {
+	/* space left for the HIDE button */
+	padding-right: 65px;
+}
+
+.form label.image-replace {
+	/* replace text with an icon */
+	display: inline-block;
+	position: absolute;
+	left: 15px;
+	top: 50%;
+	bottom: auto;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	height: 20px;
+	width: 20px;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	color: transparent;
+	text-shadow: none;
+	background-repeat: no-repeat;
+	background-position: 50% 0;
 }
 
 @keyframes show {
@@ -427,13 +323,6 @@ input[type="date"]:valid:before {
 	}
 }
 
-.checkbox {
-	margin-top: 10px;
-}
-
-.checkbox {
-	font-weight: normal;
-}
 
 .nav {
 	display: flex;
@@ -459,18 +348,8 @@ input[type="date"]:valid:before {
 	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
 
-.input-group {
-	position: relative;
-	display: table;
-	border-collapse: separate;
-}
-
 img {
 	border-radius: 50%;
-}
-
-.alert {
-	margin-bottom: -25px;
 }
 
 .mb-1 {
@@ -487,4 +366,20 @@ img {
 
 .mb-4 {
 	margin-bottom: 40;
+}
+
+.ml-1 {
+	margin-left: 10;
+}
+
+.ml-2 {
+	margin-left: 20;
+}
+
+.ml-3 {
+	margin-left: 30;
+}
+
+.ml-4 {
+	margin-left: 40;
 }

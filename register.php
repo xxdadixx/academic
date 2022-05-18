@@ -90,7 +90,7 @@ if (isset($_POST["email"])) {
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="sweetalert2.min.js"></script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="regis_style.css">
+	<link rel="stylesheet" href="css/regis_style.css">
 	<style>
 		.active_tab1 {
 			background-color: #FFFFFF;
