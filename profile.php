@@ -17,28 +17,31 @@ if (isset($_POST['update'])) {
     $result = $check_data->rowCount();
 
     if ($result > 0) {
+        if ($email) {
+            try {
+                if (!isset($error) && !isset($warning)) {
+                    $query = "UPDATE users SET email=:email, height=:height, weight=:weight WHERE id=:id";
+                    $user_data = array(
+                        ':email'   => $_POST["email"],
+                        ':height'   => $_POST["height"],
+                        ':weight'   => $_POST["weight"],
+                        ':id'   => $_SESSION['id']
+                    );
+                    $statement = $pdo->prepare($query);
+                    $statement->execute($user_data);
+                    $getRow = $statement->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION = $getRow;
+                    $_SESSION['success'] = "Profile updated successfully!";
+                    header("Location: login.php");
+                }
+            } catch (PDOException $e) {
+                $errors[] = $e->getMessage();
+            }
+        }
+    } else {
         $warning = "The email already exists in the database";
     }
-
-    try {
-        if (!isset($error) && !isset($warning)) {
-            $query = "UPDATE users SET email=:email WHERE id=:id";
-            $user_data = array(
-                ':email'   => $_POST["email"],
-                ':id'   => $_SESSION['id']
-            );
-            $statement = $pdo->prepare($query);
-            $statement->execute($user_data);
-            $getRow = $statement->fetch(PDO::FETCH_ASSOC);
-            $_SESSION = $getRow;
-            header("Location: login.php");
-        }
-    } catch (PDOException $e) {
-        $errors[] = $e->getMessage();
-    }
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +55,7 @@ if (isset($_POST['update'])) {
     <script src="javascript/script.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="css/profile_style.css">
+    <link rel="stylesheet" href="profile_style.css">
     <title>User Page</title>
 </head>
 
@@ -74,9 +77,9 @@ if (isset($_POST['update'])) {
         <div class="shadow w-350 p-3 text-center">
             <div class="user-details expanded">
                 <div class="gravatar">
-                    <img class="img-fluid rounded-circle" src="upload/<?=$_SESSION['image']?>" width="150" height="150" />
+                    <img src="upload/<?= $_SESSION['image'] ?>" width="150" height="150" />
                 </div>
-                <h2 class="user-name mt-4"><?= $_SESSION['username'] ?></h2>
+                <h2 class="user-name"><?= $_SESSION['username'] ?></h2>
                 <p class="user-email"><?= $_SESSION['email'] ?></p>
                 <p class="exclusions"><a href="#popup1" class="btn btn-success mt-3">Edit Profile</a></p>
                 <div id="popup1" class="overlay">
@@ -103,7 +106,6 @@ if (isset($_POST['update'])) {
                                         ?>
                                     </div>
                                 <?php } ?>
-
                                 <div class="container">
                                     <div class="row">
                                         <div class="col">
@@ -132,6 +134,15 @@ if (isset($_POST['update'])) {
                                             <label>ID Card Number</label>
                                             <div class="form-group">
                                                 <input type="text" name="id_card_number" id="id_card_number" class="input disable" placeholder="ID Card number" value="<?= $_SESSION['id_card_number'] ?>" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div>
+                                                <label class="label-weight">Weight</label>
+                                                <label class="label-height">Height</label>
+                                                <br>
+                                                <input type="text" name="weight" id="weight" class="input-weight" value="<?= $_SESSION['weight'] ?>" />
+                                                <input type="text" name="height" id="height" class="input-height" value="<?= $_SESSION['height'] ?>" />
                                             </div>
                                         </div>
                                     </div>

@@ -49,7 +49,7 @@ if (isset($_POST["email"])) {
 						);
 						$statement = $pdo->prepare($query);
 						$statement->execute($user_data);
-						$success = "Register finish! <a href='login.php' class='alert-link'>Login</a>";
+						header('location: login.php');
 					} else {
 						$error = "You can't upload files of this type";
 					}
@@ -71,7 +71,7 @@ if (isset($_POST["email"])) {
 				);
 				$statement = $pdo->prepare($query);
 				$statement->execute($user_data);
-				$success = "Register finish! <a href='login.php' class='alert-link'>Login</a>";
+				header('location: login.php');
 			}
 		}
 	} catch (PDOException $e) {
@@ -496,6 +496,7 @@ if (isset($error)) {
 				$('#btn_contact_details').attr("disabled", "disabled");
 				$(document).css('cursor', 'prgress');
 				$("#register_form").submit();
+				alert("Register successfully")
 			}
 
 		});

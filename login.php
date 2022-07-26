@@ -81,6 +81,15 @@ if (isset($_POST['login'])) {
 						?>
 					</div>
 				<?php } ?>
+
+				<?php if (isset($_SESSION['success'])) { ?>
+					<div class="alert alert-success mt-3" role="alert">
+						<?php {
+							echo $_SESSION['success'];
+						}
+						?>
+					</div>
+				<?php } ?>
 				<p class="fieldset mt-4">
 					<label class="image-replace username">Username</label>
 					<input class="full-width has-padding has-border" type="text" placeholder="Username" value="<?php if (isset($_COOKIE['user_login'])) {
