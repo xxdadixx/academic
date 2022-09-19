@@ -18,6 +18,10 @@
   --max-height: 1000px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   margin: 0;
   padding: 0;
