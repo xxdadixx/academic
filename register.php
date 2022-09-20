@@ -109,7 +109,7 @@ if (isset($_POST["email"])) {
 		}
 	</style>
 
-	<title>Register Page</title>
+	<title>Sign Up Page</title>
 </head>
 
 <body>
